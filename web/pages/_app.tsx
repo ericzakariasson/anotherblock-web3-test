@@ -4,12 +4,13 @@ import type { AppProps } from "next/app";
 import { WagmiConfig, createClient, configureChains, chain } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
+import { infuraProvider } from "wagmi/providers/infura";
 
-import { publicProvider } from "wagmi/providers/public";
+const infuraId = process.env.NEXT_PUBLIC_INFURA_ID as string;
 
 const { chains, provider, webSocketProvider } = configureChains(
   [chain.rinkeby],
-  [publicProvider()]
+  [infuraProvider({ infuraId })]
 );
 
 const client = createClient({
