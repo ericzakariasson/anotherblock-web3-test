@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useAccount, useConnect } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
+import { GmButton } from "../components/GmButton";
 import { GmCounter } from "../components/GmCounter";
 import styles from "../styles/Home.module.css";
 
@@ -19,7 +20,10 @@ const Home: NextPage = () => {
       </Head>
       <main>
         {isConnected ? (
-          <GmCounter />
+          <>
+            <GmCounter />
+            <GmButton />
+          </>
         ) : (
           <button onClick={() => connect()}>Connect Wallet</button>
         )}
