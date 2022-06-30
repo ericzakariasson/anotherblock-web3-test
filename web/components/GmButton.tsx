@@ -3,15 +3,15 @@ import { useContractWrite } from "wagmi";
 import LFG from "../LFG.json";
 
 type GmButtonProps = {
-  onSuccess: () => void;
+  onGm: () => void;
 };
 
-export const GmButton: FC<GmButtonProps> = ({ onSuccess }) => {
-  const { data, isLoading, isError, write } = useContractWrite({
+export const GmButton: FC<GmButtonProps> = ({ onGm }) => {
+  const { isLoading, isError, write } = useContractWrite({
     addressOrName: LFG.address,
     contractInterface: LFG.abi,
     functionName: "gm",
-    onSuccess,
+    onSuccess: onGm,
   });
 
   return (

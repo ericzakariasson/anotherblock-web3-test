@@ -1,23 +1,25 @@
 import { BigNumber } from "ethers";
 import { FC } from "react";
-import { useGmCounter } from "../hooks/useGmCounter";
+import { useContractRead } from "wagmi";
+import LFG from "../LFG.json";
 
-type GmCounterProps = {
-  counter: ReturnType<typeof useGmCounter>;
-};
+export const GmCounter: FC = () => {
+  const { data, isLoading, isError } = useContractRead({
+    addressOrName: LFG.address,
+    contractInterface: LFG.abi,
+    functionName: "gmCount",
+    watch: true,
+  });
 
-export const GmCounter: FC<GmCounterProps> = ({ counter }) => {
-  if (counter.isError) {
+  if (isError) {
     return <h1>Error 😔</h1>;
   }
 
-  if (counter.isLoading) {
+  if (isLoading) {
     return <h1>Loading...</h1>;
   }
 
-  const count = BigNumber.isBigNumber(counter.data)
-    ? counter.data.toNumber()
-    : 0;
+  const count = BigNumber.isBigNumber(data) ? data.toNumber() : 0;
 
   return (
     <h1>
