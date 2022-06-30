@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "hardhat test"
+    "test": "hardhat test",
+    "deploy:rinkeby": "hardhat deploy --network rinkeby"
   },
   "author": "",
   "license": "ISC",
