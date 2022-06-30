@@ -4,13 +4,16 @@ import { useAccount, useConnect } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { GmButton } from "../components/GmButton";
 import { GmCounter } from "../components/GmCounter";
-import styles from "../styles/Home.module.css";
+import { useGmCounter } from "../hooks/useGmCounter";
 
 const Home: NextPage = () => {
   const { isConnected } = useAccount();
+
   const { connect } = useConnect({
     connector: new InjectedConnector(),
   });
+
+  const counter = useGmCounter();
 
   return (
     <div>
@@ -21,8 +24,8 @@ const Home: NextPage = () => {
       <main>
         {isConnected ? (
           <>
-            <GmCounter />
-            <GmButton />
+            <GmCounter counter={counter} />
+            <GmButton onSuccess={counter.refetch} />
           </>
         ) : (
           <button onClick={() => connect()}>Connect Wallet</button>
