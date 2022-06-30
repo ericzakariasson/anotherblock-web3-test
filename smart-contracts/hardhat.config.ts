@@ -28,10 +28,10 @@ const config: HardhatUserConfig = {
   defaultNetwork: 'hardhat',
 
   networks: {
-    rinkeby: {
-      url: `https://rinkeby.infura.io/v3/${INFURA_KEY}`,
-      accounts: [`${PRIVATE_KEY}`],
-    },
+    // rinkeby: {
+    //   url: `https://rinkeby.infura.io/v3/${INFURA_KEY}`,
+    //   accounts: [`${PRIVATE_KEY}`],
+    // },
     localhost: {
       url: 'http://127.0.0.1:8545',
       saveDeployments: true,
