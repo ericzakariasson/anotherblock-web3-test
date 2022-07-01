@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import { useAccount, useConnect, useContractEvent } from "wagmi";
+import { useAccount, useConnect, useContractEvent, useDisconnect } from "wagmi";
 import { InjectedConnector } from "wagmi/connectors/injected";
 import { UseContractEventConfig } from "wagmi/dist/declarations/src/hooks/contracts/useContractEvent";
 import { GmButton } from "../components/GmButton";
@@ -28,14 +28,28 @@ const Home: NextPage = () => {
     listener: onWagmi,
   });
 
-  const { connect } = useConnect();
+  const { connect } = useConnect({
+    connector: new InjectedConnector(),
+  });
+
+  const { disconnect } = useDisconnect();
 
   return (
-    <div>
+    <div className="h-screen p-4 flex flex-col">
       <Head>
         <title>gm</title>
       </Head>
-      <main className="h-screen w-full flex flex-col items-center justify-center">
+      <header className="flex justify-end">
+        {isConnected && (
+          <button
+            className="text-sm text-slate-300"
+            onClick={() => disconnect()}
+          >
+            {address}
+          </button>
+        )}
+      </header>
+      <main className="w-full flex-1 flex flex-col items-center justify-center">
         {isConnected ? (
           <>
             <GmCounter />
@@ -43,7 +57,12 @@ const Home: NextPage = () => {
             {isMinting && <p className="mt-2">soon (wagmi) 🚀</p>}
           </>
         ) : (
-          <button onClick={() => connect()}>Connect Wallet</button>
+          <button
+            className="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-lg px-5 py-2.5 text-center mt-6"
+            onClick={() => connect()}
+          >
+            Connect Wallet
+          </button>
         )}
       </main>
     </div>
