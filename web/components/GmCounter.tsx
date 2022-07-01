@@ -22,7 +22,7 @@ export const GmCounter: FC = () => {
   const count = BigNumber.isBigNumber(data) ? data.toNumber() : 0;
 
   return (
-    <h1>
+    <h1 className="text-5xl font-extrabold">
       {count} gm{count === 1 ? "" : "'s"} so far ☕️{" "}
       <span>{count === 0 && "(ngmi)"}</span>
     </h1>

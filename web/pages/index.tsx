@@ -35,12 +35,12 @@ const Home: NextPage = () => {
       <Head>
         <title>gm</title>
       </Head>
-      <main>
+      <main className="h-screen w-full flex flex-col items-center justify-center">
         {isConnected ? (
           <>
             <GmCounter />
             <GmButton onGm={() => setIsMinting(true)} />
-            {isMinting && <p>Brewing coffee...</p>}
+            {isMinting && <p className="mt-2">soon (wagmi) 🚀</p>}
           </>
         ) : (
           <button onClick={() => connect()}>Connect Wallet</button>
